@@ -2,6 +2,7 @@
 
 
 #include "PlayerCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -23,6 +24,7 @@ APlayerCharacter::APlayerCharacter()
 	//sets camera values
 	MainCamera->SetRelativeLocation(OriginalCamLocation);
 	MainCamera->SetRelativeRotation(OriginalCamRotation);
+	
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +41,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 	if (Climbing)
 	{
 		Climbing = ClimbLineTrace();
+		if (!Climbing)GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
 	}
 }
 
@@ -64,7 +67,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 //movement functions
 void APlayerCharacter::ForwardMovement(float AxisAmount)
 {
-	AddMovementInput(GetActorForwardVector() * AxisAmount);
+	if(!Climbing)AddMovementInput(GetActorForwardVector() * AxisAmount);
+	else AddMovementInput(GetActorUpVector() * AxisAmount);
 }
 
 void APlayerCharacter::Strafe(float AxisAmount)
@@ -79,7 +83,7 @@ void APlayerCharacter::LookUp(float AxisAmount)
 
 void APlayerCharacter::Turn(float AxisAmount)
 {
-	AddControllerYawInput(AxisAmount);
+	if(!Climbing)AddControllerYawInput(AxisAmount);
 }
 
 //special movment functions
@@ -95,15 +99,23 @@ void APlayerCharacter::EndCrouch()
 
 void APlayerCharacter::Dash()
 {
-	LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);
+	if(!Climbing)LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);
 }
 
 void APlayerCharacter::Climb()
 {
-	Climbing = ClimbLineTrace();
+
+	if (!Climbing)Climbing = ClimbLineTrace();
+	else
+	{
+		Climbing = false;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
+	}
 	if (Climbing)
 	{
-
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+		FRotator currentRot = GetActorRotation();
+		SetActorRotation(FRotator(currentRot.Roll, currentRot.Pitch, wallRot.Yaw + WallRotAdd));
 	}
 
 }
@@ -120,7 +132,20 @@ void APlayerCharacter::RightDash()
 
 bool APlayerCharacter::ClimbLineTrace()
 {
-	return false;
+	AController* ControllerRef = GetController();//gets the controller
+	FVector CamLocation;//camera location
+	FRotator CamRotation;//camera rotation
+	ControllerRef->GetPlayerViewPoint(CamLocation, CamRotation);//uses the location and rotation to get the cameras viewpoint 
+	FVector End = CamLocation + CamRotation.Vector() * CastRange;// gets the end point for a LineTrace
+
+	FHitResult Hit;
+	bool bTargetHit = GetWorld()->LineTraceSingleByChannel(Hit, CamLocation, End, ECC_Visibility);
+	if (bTargetHit) {
+		
+		wallRot = Hit.Normal.Rotation();
+		
+	}
+	return bTargetHit;
 }
 
 

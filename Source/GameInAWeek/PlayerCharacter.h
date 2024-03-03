@@ -76,7 +76,15 @@ private:
 	UPROPERTY(EditAnywhere)
 	float DashSpeed = 1000.0f;
 
+	UPROPERTY(EditAnywhere)
+	float CastRange = 350.0f;
 
 	UPROPERTY()
 	bool Climbing = false;
+
+	UPROPERTY()
+	float WallRotAdd = 180.0f;
+
+	UPROPERTY()
+	FRotator wallRot;
 };
