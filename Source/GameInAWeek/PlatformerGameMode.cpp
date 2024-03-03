@@ -34,7 +34,24 @@ FVector APlatformerGameMode::GetCheckpoint()
 	return CurrentCheckpoint;
 }
 
-void APlatformerGameMode::GameOver()
+void APlatformerGameMode::GameOver(bool Complete)
 {
+	InGame = false;
+	winner = Complete;
+}
 
+bool APlatformerGameMode::GetGameState()
+{
+	return InGame;
+}
+
+bool APlatformerGameMode::GetWinState()
+{
+	return winner;
+}
+
+float APlatformerGameMode::CoinPercent()
+{
+	MaxCoints = totalCoins + coinsFound;
+	return (coinsFound / MaxCoints) * percMulti;
 }

@@ -29,13 +29,26 @@ public:
 	UFUNCTION()
 	FVector GetCheckpoint();
 	UFUNCTION()
-	void GameOver();
+	void GameOver(bool Complete);
+	UFUNCTION()
+	bool GetGameState();
+	UFUNCTION()
+	bool GetWinState();
 private:
-	
+	UPROPERTY()
+	bool InGame = false;
+	UPROPERTY()
+	bool winner = false;
 	UPROPERTY()
 	FVector CurrentCheckpoint;
 	UPROPERTY()
 	int totalCoins = 0;
 	UPROPERTY()
 	int coinsFound = 0;
+	UPROPERTY()
+	int MaxCoints = 0;
+
+	const int percMulti = 100;
+	UFUNCTION()
+	float CoinPercent();
 };

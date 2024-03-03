@@ -25,7 +25,7 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	APlatformerGameMode* GameModeRef;
-
+	
 	UPROPERTY()
 	int coinsFound = 0;
 	UPROPERTY()

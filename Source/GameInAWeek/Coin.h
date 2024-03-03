@@ -30,6 +30,7 @@ private:
 	UStaticMeshComponent* coinMesh;
 	UPROPERTY(EditAnywhere)
 	float spinSpeed = 35.0f;
+
 	UPROPERTY(VisibleAnywhere)
 	APlatformerGameMode* GameModeRef;
 	UFUNCTION()

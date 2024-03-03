@@ -36,7 +36,10 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (Climbing)
+	{
+		Climbing = ClimbLineTrace();
+	}
 }
 
 // Called to bind functionality to input
@@ -52,6 +55,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Pressed, this, &APlayerCharacter::StartCrouch);
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Released, this, &APlayerCharacter::EndCrouch);
 	PlayerInputComponent->BindAction(TEXT("Dash"), IE_Pressed, this, &APlayerCharacter::Dash);
+	PlayerInputComponent->BindAction(TEXT("Climb"), IE_Pressed, this, &APlayerCharacter::Climb);
+	PlayerInputComponent->BindAction(TEXT("LeftDash"), IE_Pressed, this, &APlayerCharacter::LeftDash);
+	PlayerInputComponent->BindAction(TEXT("RightDash"), IE_Pressed, this, &APlayerCharacter::RightDash);
 }
 
 
@@ -90,6 +96,31 @@ void APlayerCharacter::EndCrouch()
 void APlayerCharacter::Dash()
 {
 	LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);
+}
+
+void APlayerCharacter::Climb()
+{
+	Climbing = ClimbLineTrace();
+	if (Climbing)
+	{
+
+	}
+
+}
+
+void APlayerCharacter::LeftDash()
+{
+	LaunchCharacter(GetActorRightVector() * -DashSpeed, false, false);
+}
+
+void APlayerCharacter::RightDash()
+{
+	LaunchCharacter(GetActorRightVector() * DashSpeed, false, false);
+}
+
+bool APlayerCharacter::ClimbLineTrace()
+{
+	return false;
 }
 
 

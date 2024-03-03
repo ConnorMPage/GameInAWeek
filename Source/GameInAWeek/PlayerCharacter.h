@@ -48,6 +48,15 @@ private:
 	void EndCrouch();
 	UFUNCTION()
 	void Dash();
+	UFUNCTION()
+	void Climb();
+	UFUNCTION()
+	void LeftDash();
+	UFUNCTION()
+	void RightDash();
+
+	UFUNCTION()
+	bool ClimbLineTrace();
 
 	UPROPERTY(EditAnywhere)
 	UCameraComponent* MainCamera;
@@ -66,4 +75,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float DashSpeed = 1000.0f;
+
+
+	UPROPERTY()
+	bool Climbing = false;
 };
