@@ -2,6 +2,7 @@
 
 
 #include "PlatformerGameMode.h"
+#include <Kismet/GameplayStatics.h>
 
 void APlatformerGameMode::AddCoinToTotal()
 {
@@ -38,6 +39,7 @@ void APlatformerGameMode::GameOver(bool Complete)
 {
 	InGame = false;
 	winner = Complete;
+	GetWorld()->GetTimerManager().SetTimer(EndOfGameTimer, this, &APlatformerGameMode::LoadNextLevel, EndGameLength, false);
 }
 
 bool APlatformerGameMode::GetGameState()
@@ -54,4 +56,20 @@ float APlatformerGameMode::CoinPercent()
 {
 	MaxCoints = totalCoins + coinsFound;
 	return (coinsFound / MaxCoints) * percMulti;
+}
+
+void APlatformerGameMode::ReduceLives()
+{
+	Lives--;
+	if (Lives <= zero)GameOver(false);
+}
+
+int APlatformerGameMode::GetLives()
+{
+	return Lives;
+}
+
+void APlatformerGameMode::LoadNextLevel()
+{
+	UGameplayStatics::OpenLevel(GetWorld(), "MainLevel");
 }

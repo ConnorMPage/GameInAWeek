@@ -24,6 +24,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 private:
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* CheckpointMesh;
+
 	UPROPERTY(EditAnywhere)
 	bool isStart = false;
 	UPROPERTY(EditAnywhere)

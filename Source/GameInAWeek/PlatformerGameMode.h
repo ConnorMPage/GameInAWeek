@@ -34,6 +34,12 @@ public:
 	bool GetGameState();
 	UFUNCTION()
 	bool GetWinState();
+	UFUNCTION()
+	float CoinPercent();
+	UFUNCTION()
+	void ReduceLives();
+	UFUNCTION()
+	int GetLives();
 private:
 	UPROPERTY()
 	bool InGame = false;
@@ -48,7 +54,15 @@ private:
 	UPROPERTY()
 	int MaxCoints = 0;
 
+	UPROPERTY(EditAnywhere)
+	int Lives = 3;
+
+	const int zero = 0;
 	const int percMulti = 100;
+	
 	UFUNCTION()
-	float CoinPercent();
+	void LoadNextLevel();
+	UPROPERTY(EditAnywhere)
+	float EndGameLength = 5.0f;
+	FTimerHandle EndOfGameTimer;
 };

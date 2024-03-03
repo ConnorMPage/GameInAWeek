@@ -10,7 +10,11 @@ ACheckpoint::ACheckpoint()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	CheckpointMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Checkpoint Mesh"));//creates mesh
+	SetRootComponent(CheckpointMesh);
+
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box"));//creates collision box
+	CollisionBox->SetupAttachment(CheckpointMesh);
 	CollisionBox->SetBoxExtent(BoxExtentSize);//sets box size
 	CollisionBox->SetRelativeLocation(BoxLocation);//sets box location
 	CollisionBox->SetCollisionProfileName("Trigger");//sets collision profile
