@@ -28,7 +28,7 @@ void ACoin::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	coinMesh->AddLocalRotation(FQuat(spinSpeed*DeltaTime));
+	AddActorLocalRotation(FRotator(0.f, spinSpeed * DeltaTime, 0.f));
 }
 
 void ACoin::OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)

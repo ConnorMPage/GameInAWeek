@@ -24,9 +24,16 @@ public:
 	int GetCoinTotal();
 	UFUNCTION()
 	int GetCoinsFound();
+	UFUNCTION()
+	void setCheckpoint(FVector checkpointPos);
+	UFUNCTION()
+	FVector GetCheckpoint();
+	UFUNCTION()
+	void GameOver();
 private:
 	
-	
+	UPROPERTY()
+	FVector CurrentCheckpoint;
 	UPROPERTY()
 	int totalCoins = 0;
 	UPROPERTY()

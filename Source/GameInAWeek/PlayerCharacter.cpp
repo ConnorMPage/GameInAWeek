@@ -89,7 +89,7 @@ void APlayerCharacter::EndCrouch()
 
 void APlayerCharacter::Dash()
 {
-
+	LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);
 }
 
 

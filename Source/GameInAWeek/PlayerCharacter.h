@@ -63,4 +63,7 @@ private:
 	FVector SpringArmLocation = FVector(0.0f, 0.0f, 90.0f);//location of the spring arm
 	UPROPERTY(VisibleAnywhere)
 	float SpringArmLength = 200.0f;//Length of Springarm
+
+	UPROPERTY(EditAnywhere)
+	float DashSpeed = 1000.0f;
 };

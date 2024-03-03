@@ -23,3 +23,18 @@ int APlatformerGameMode::GetCoinsFound()
 {
 	return coinsFound;
 }
+
+void APlatformerGameMode::setCheckpoint(FVector checkpointPos)
+{
+	CurrentCheckpoint = checkpointPos;
+}
+
+FVector APlatformerGameMode::GetCheckpoint()
+{
+	return CurrentCheckpoint;
+}
+
+void APlatformerGameMode::GameOver()
+{
+
+}
