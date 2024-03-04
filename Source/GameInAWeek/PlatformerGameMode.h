@@ -62,6 +62,10 @@ private:
 	
 	UFUNCTION()
 	void LoadNextLevel();
+
+	UFUNCTION()
+	void ReloadLevel1();
+
 	UPROPERTY(EditAnywhere)
 	float EndGameLength = 5.0f;
 	FTimerHandle EndOfGameTimer;

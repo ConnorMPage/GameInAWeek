@@ -24,7 +24,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CheckpointMesh;
 
 	UPROPERTY(EditAnywhere)
@@ -33,7 +33,7 @@ private:
 	bool isFinish = false;
 	UPROPERTY(VisibleAnywhere)
 	APlatformerGameMode* GameModeRef;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UBoxComponent* CollisionBox;//creates collision box
 	UPROPERTY(EditAnywhere)
 	FVector BoxExtentSize = FVector(100.0f, 100.0f, 10.0f);//box size

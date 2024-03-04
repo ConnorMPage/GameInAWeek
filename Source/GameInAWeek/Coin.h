@@ -26,7 +26,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* coinMesh;
 	UPROPERTY(EditAnywhere)
 	float spinSpeed = 35.0f;

@@ -10,7 +10,7 @@ ATimePads::ATimePads()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	TimePadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Time Pad Mesh"));//creates mesh
-	SetRootComponent(TimePadMesh);
+	
 	
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box"));//creates collision box
 	CollisionBox->SetupAttachment(TimePadMesh);

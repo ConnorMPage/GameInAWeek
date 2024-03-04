@@ -61,7 +61,12 @@ float APlatformerGameMode::CoinPercent()
 void APlatformerGameMode::ReduceLives()
 {
 	Lives--;
-	if (Lives <= zero)GameOver(false);
+	if (Lives <= zero)
+	{
+		GameOver(false);
+		Lives = zero;
+	}
+
 }
 
 int APlatformerGameMode::GetLives()
@@ -70,6 +75,11 @@ int APlatformerGameMode::GetLives()
 }
 
 void APlatformerGameMode::LoadNextLevel()
+{
+	UGameplayStatics::OpenLevel(GetWorld(), "MainLevel");
+}
+
+void APlatformerGameMode::ReloadLevel1()
 {
 	UGameplayStatics::OpenLevel(GetWorld(), "MainLevel");
 }

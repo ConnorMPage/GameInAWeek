@@ -29,7 +29,7 @@ public:
 	
 
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* TimePadMesh;
 
 	UPROPERTY(EditAnywhere)
@@ -53,7 +53,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	bool isReset = false;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UBoxComponent* CollisionBox;//creates collision box
 	UPROPERTY(EditAnywhere)
 	FVector BoxExtentSize = FVector(100.0f, 100.0f, 10.0f);//box size

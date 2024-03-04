@@ -11,16 +11,15 @@ void AThePlayerController::BeginPlay()
 
 	CrosshairUI = CreateWidget(this, CrosshairClass);
 	if (CrosshairUI != nullptr)CrosshairUI->AddToViewport();
-	
+
 	PlayerHudUI = CreateWidget(this, PlayerHudClass);
 	if (PlayerHudUI != nullptr)PlayerHudUI->AddToViewport();
+
+
 	
 
-	LossUI = CreateWidget(this, LossClass);
-	WinUI = CreateWidget(this, WinClass);
-	Win1UI = CreateWidget(this, Win1Class);
-	Win2UI = CreateWidget(this, Win2Class);
-	Win3UI = CreateWidget(this, Win3Class);
+
+
 }
 
 void AThePlayerController::Tick(float DeltaTime)
@@ -59,24 +58,30 @@ void AThePlayerController::EndofGame()
 		WinPerc = GameModeRef->CoinPercent();
 		if (WinPerc < oneStar)
 		{
+			WinUI = CreateWidget(this, WinClass);
 			if (WinUI != nullptr)WinUI->AddToViewport();
 		}
 		else if (WinPerc >= oneStar && WinPerc < twoStar)
 		{
+			Win1UI = CreateWidget(this, Win1Class);
 			if (Win1UI != nullptr)Win1UI->AddToViewport();
 		}
 		else if (WinPerc >= twoStar && WinPerc < threeStar)
 		{
+			Win2UI = CreateWidget(this, Win2Class);
 			if (Win2UI != nullptr)Win2UI->AddToViewport();
 		}
 		else if (WinPerc >= threeStar)
 		{
+			Win3UI = CreateWidget(this, Win3Class);
+		
 			if (Win3UI != nullptr)Win3UI->AddToViewport();
 		}
 
 	}
 	else
 	{
+		LossUI = CreateWidget(this, LossClass);
 		if (LossUI != nullptr)LossUI->AddToViewport();
 	}
 }
