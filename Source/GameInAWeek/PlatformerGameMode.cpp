@@ -81,5 +81,5 @@ void APlatformerGameMode::LoadNextLevel()
 
 void APlatformerGameMode::ReloadLevel1()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), "MainLevel");
+	UGameplayStatics::OpenLevel(GetWorld(), "TutorialLevel");
 }

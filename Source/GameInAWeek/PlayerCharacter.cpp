@@ -41,7 +41,12 @@ void APlayerCharacter::Tick(float DeltaTime)
 	if (Climbing)
 	{
 		Climbing = ClimbLineTrace();
-		if (!Climbing)GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
+		if (!Climbing)
+		{
+			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
+			SetActorRotation(FRotator(0.0f,0.0f,0.0f));
+		}
+
 	}
 }
 

@@ -5,6 +5,7 @@
 #include <Kismet/GameplayStatics.h>
 #include "PlatformerGameMode.h"
 
+
 // Sets default values
 ACheckpoint::ACheckpoint()
 {

@@ -42,7 +42,7 @@ public:
 	int GetLives();
 private:
 	UPROPERTY()
-	bool InGame = false;
+	bool InGame = true;
 	UPROPERTY()
 	bool winner = false;
 	UPROPERTY()
@@ -55,7 +55,7 @@ private:
 	int MaxCoints = 0;
 
 	UPROPERTY(EditAnywhere)
-	int Lives = 3;
+	int Lives = 5;
 
 	const int zero = 0;
 	const int percMulti = 100;

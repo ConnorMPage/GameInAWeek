@@ -28,7 +28,7 @@ void AThePlayerController::Tick(float DeltaTime)
 	coinsLeft = GameModeRef->GetCoinTotal();
 	coinsFound = GameModeRef->GetCoinsFound();
 	LivesLeft = GameModeRef->GetLives();
-	if (GameModeRef->GetGameState())EndofGame();
+	if (!GameModeRef->GetGameState())EndofGame();
 }
 
 int AThePlayerController::GetCoinsLeft()

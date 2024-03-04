@@ -33,11 +33,11 @@ private:
 	UStaticMeshComponent* TimePadMesh;
 
 	UPROPERTY(EditAnywhere)
-	float DefaultGameSpeed = 2.0f;
+	float DefaultGameSpeed = 1.0f;
 
 
 	UPROPERTY(EditAnywhere)
-	float FastSpeed =1.0f ;
+	float FastSpeed =3.0f ;
 
 	UPROPERTY(EditAnywhere)
 	float SlowSpeed = 0.5f;
