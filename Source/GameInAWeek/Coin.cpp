@@ -18,9 +18,9 @@ ACoin::ACoin()
 void ACoin::BeginPlay()
 {
 	Super::BeginPlay();
-	OnActorHit.AddDynamic(this, &ACoin::OnHit);
-	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-	GameModeRef->AddCoinToTotal();
+	OnActorHit.AddDynamic(this, &ACoin::OnHit);//adds hit dynamic 
+	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));//casts to the game mode
+	GameModeRef->AddCoinToTotal();//increases the total coins in the game 
 }
 
 // Called every frame
@@ -28,12 +28,12 @@ void ACoin::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	AddActorLocalRotation(FRotator(0.f, spinSpeed * DeltaTime, 0.f));
+	AddActorLocalRotation(FRotator(0.f, spinSpeed * DeltaTime, 0.f));//constantly rotates the coins 
 }
 
 void ACoin::OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
-	GameModeRef->coinFound();
-	Destroy();
+	GameModeRef->coinFound();//increases found count 
+	Destroy();//destroys the coin object from gameworld
 }
 

@@ -25,12 +25,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private:
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* CheckpointMesh;
+	UStaticMeshComponent* CheckpointMesh;//mesh component 
 
 	UPROPERTY(EditAnywhere)
-	bool isStart = false;
+	bool isStart = false;//is the start point
 	UPROPERTY(EditAnywhere)
-	bool isFinish = false;
+	bool isFinish = false;//is the finish line 
 	UPROPERTY(VisibleAnywhere)
 	APlatformerGameMode* GameModeRef;
 	UPROPERTY(EditAnywhere)
@@ -41,7 +41,7 @@ private:
 	FVector BoxLocation = FVector(0.0f, 0.0f, 0.0f);//box location
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);//overlap function 
 	UFUNCTION()
-	void SetNewCheckpoint(FVector Pos);
+	void SetNewCheckpoint(FVector Pos);//set new checkpoint function
 };

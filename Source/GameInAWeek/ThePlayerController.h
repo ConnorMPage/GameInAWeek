@@ -18,6 +18,7 @@ protected:
 	virtual void BeginPlay() override;
 public:
 	virtual void Tick(float DeltaTime) override;
+	//blueprint pure getter functions 
 	UFUNCTION(BlueprintPure)
 	int GetCoinsLeft();
 	UFUNCTION(BlueprintPure)
@@ -28,7 +29,9 @@ public:
 	float GetLives();
 private:
 	UPROPERTY(VisibleAnywhere)
-	APlatformerGameMode* GameModeRef;
+	APlatformerGameMode* GameModeRef;//game mode reference 
+
+	//hud variables 
 	UPROPERTY()
 	int LivesLeft;
 	UPROPERTY()
@@ -44,6 +47,8 @@ private:
 	UPROPERTY()
 	float threeStar = 75.0f;
 
+
+	//widgets 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UUserWidget> PlayerHudClass;
 	UPROPERTY()
@@ -76,5 +81,5 @@ private:
 
 
 	UFUNCTION()
-	void EndofGame();
+	void EndofGame();//runs the win/loss screens 
 };

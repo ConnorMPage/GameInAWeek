@@ -38,13 +38,13 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Climbing)
+	if (Climbing)//chercks if currently climbing 
 	{
-		Climbing = ClimbLineTrace();
-		if (!Climbing)
+		Climbing = ClimbLineTrace();//if climbing check if still close enough to a wall surface 
+		if (!Climbing)//if no longer climbing 
 		{
-			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
-			SetActorRotation(FRotator(0.0f,0.0f,0.0f));
+			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);//sets move state to falling but once the player touches the ground it is auto set to walking 
+			SetActorRotation(FRotator(0.0f,0.0f,0.0f));//resets rotation 
 		}
 
 	}
@@ -54,6 +54,8 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	//movment bindings 
 	PlayerInputComponent->BindAxis(TEXT("ForwardMovement"), this, &APlayerCharacter::ForwardMovement);
 	PlayerInputComponent->BindAxis(TEXT("Strafe"), this, &APlayerCharacter::Strafe);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APlayerCharacter::LookUp);
@@ -72,67 +74,67 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 //movement functions
 void APlayerCharacter::ForwardMovement(float AxisAmount)
 {
-	if(!Climbing)AddMovementInput(GetActorForwardVector() * AxisAmount);
-	else AddMovementInput(GetActorUpVector() * AxisAmount);
+	if(!Climbing)AddMovementInput(GetActorForwardVector() * AxisAmount);//if not climbing move forward backwards 
+	else AddMovementInput(GetActorUpVector() * AxisAmount);//if climbing then move up and down 
 }
 
 void APlayerCharacter::Strafe(float AxisAmount)
 {
-	AddMovementInput(GetActorRightVector() * AxisAmount);
+	AddMovementInput(GetActorRightVector() * AxisAmount);//left and right movement 
 }
 
 void APlayerCharacter::LookUp(float AxisAmount)
 {
-	AddControllerPitchInput(AxisAmount);
+	AddControllerPitchInput(AxisAmount);//look up and down 
 }
 
 void APlayerCharacter::Turn(float AxisAmount)
 {
-	if(!Climbing)AddControllerYawInput(AxisAmount);
+	if(!Climbing)AddControllerYawInput(AxisAmount); // rotate side to side, if climbing this is disabled
 }
 
 //special movment functions
 void APlayerCharacter::StartCrouch()
 {
-	APlayerCharacter::Crouch();
+	APlayerCharacter::Crouch();// would work but no aniamtion is set up
 }
 
 void APlayerCharacter::EndCrouch()
 {
-	APlayerCharacter::UnCrouch();
+	APlayerCharacter::UnCrouch();// would work but no aniamtion is set u
 }
 
 void APlayerCharacter::Dash()
 {
-	if(!Climbing)LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);
+	if(!Climbing)LaunchCharacter(GetActorForwardVector() * DashSpeed, false, false);//launches the character on its forward vector 
 }
 
 void APlayerCharacter::Climb()
 {
 
-	if (!Climbing)Climbing = ClimbLineTrace();
-	else
+	if (!Climbing)Climbing = ClimbLineTrace();//if not already climbing then it will exectue a line trace 
+	else//if already climbing and the climb button is pressed 
 	{
-		Climbing = false;
-		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
+		Climbing = false;//climbing is set to false 
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);//movement mode is set to falling 
 	}
-	if (Climbing)
+	if (Climbing)//if climbing is nnow enabled
 	{
-		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
-		FRotator currentRot = GetActorRotation();
-		SetActorRotation(FRotator(currentRot.Roll, currentRot.Pitch, wallRot.Yaw + WallRotAdd));
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);//movement mode is set to flying to deactivate gravity 
+		FRotator currentRot = GetActorRotation();//gets the actors rotation
+		SetActorRotation(FRotator(currentRot.Roll, currentRot.Pitch, wallRot.Yaw + WallRotAdd));//sets the characters rotation to be set towards the wall 
 	}
 
 }
 
 void APlayerCharacter::LeftDash()
 {
-	LaunchCharacter(GetActorRightVector() * -DashSpeed, false, false);
+	LaunchCharacter(GetActorRightVector() * -DashSpeed, false, false);//launches the character using the right vector with a negative speed
 }
 
 void APlayerCharacter::RightDash()
 {
-	LaunchCharacter(GetActorRightVector() * DashSpeed, false, false);
+	LaunchCharacter(GetActorRightVector() * DashSpeed, false, false);//launches the character to the right 
 }
 
 bool APlayerCharacter::ClimbLineTrace()
@@ -144,13 +146,13 @@ bool APlayerCharacter::ClimbLineTrace()
 	FVector End = CamLocation + CamRotation.Vector() * CastRange;// gets the end point for a LineTrace
 
 	FHitResult Hit;
-	bool bTargetHit = GetWorld()->LineTraceSingleByChannel(Hit, CamLocation, End, ECC_Visibility);
+	bool bTargetHit = GetWorld()->LineTraceSingleByChannel(Hit, CamLocation, End, ECC_Visibility);//linetrace
 	if (bTargetHit) {
 		
-		wallRot = Hit.Normal.Rotation();
+		wallRot = Hit.Normal.Rotation();//gets the rotation of the hit object
 		
 	}
-	return bTargetHit;
+	return bTargetHit;//returns true if object is hit 
 }
 
 

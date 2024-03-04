@@ -23,7 +23,7 @@ ATimePads::ATimePads()
 void ATimePads::BeginPlay()
 {
 	Super::BeginPlay();
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ATimePads::OnOverlapBegin);
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ATimePads::OnOverlapBegin);//adds overlap dynamic 
 }
 
 // Called every frame
@@ -39,7 +39,7 @@ void ATimePads::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	if(isSlow)NewGameSpeed = SlowSpeed;
 	if(isReset)NewGameSpeed = DefaultGameSpeed;
 
-	if (isFast|| isSlow|| isReset)GetWorldSettings()->SetTimeDilation(NewGameSpeed);
+	if (isFast|| isSlow|| isReset)GetWorldSettings()->SetTimeDilation(NewGameSpeed);//if it is set to change time speed then it will change time dialation by the new speed 
 		
 	
 	

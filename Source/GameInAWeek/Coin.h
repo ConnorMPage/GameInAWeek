@@ -27,13 +27,13 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* coinMesh;
+	UStaticMeshComponent* coinMesh;//creates mesh component 
 	UPROPERTY(EditAnywhere)
-	float spinSpeed = 35.0f;
+	float spinSpeed = 35.0f;//speed for the coin spin
 
 	UPROPERTY(VisibleAnywhere)
-	APlatformerGameMode* GameModeRef;
+	APlatformerGameMode* GameModeRef; // reference to gamemode
 	UFUNCTION()
 	void OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse,
-		const FHitResult& Hit);
+		const FHitResult& Hit);//hit event function declaration 
 };

@@ -24,10 +24,10 @@ ACheckpoint::ACheckpoint()
 // Called when the game starts or when spawned
 void ACheckpoint::BeginPlay()
 {
-	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));//cast to gamemode 
 	Super::BeginPlay();
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ACheckpoint::OnOverlapBegin);
-	if (isStart)SetNewCheckpoint(this->GetActorLocation());
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ACheckpoint::OnOverlapBegin);//overlap dynamic 
+	if (isStart)SetNewCheckpoint(this->GetActorLocation());//if its the start point set the current checkpoint 
 }
 
 // Called every frame
@@ -39,12 +39,12 @@ void ACheckpoint::Tick(float DeltaTime)
 
 void ACheckpoint::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	SetNewCheckpoint(this->GetActorLocation());
+	SetNewCheckpoint(this->GetActorLocation());//sets teh new checkpoint to the checkpoints position 
 	if (isFinish)GameModeRef->GameOver(true);
 }
 
 void ACheckpoint::SetNewCheckpoint(FVector Pos)
 {
-	GameModeRef->setCheckpoint(Pos);
+	GameModeRef->setCheckpoint(Pos);//sets the current checkpoint in gamemode 
 }
 

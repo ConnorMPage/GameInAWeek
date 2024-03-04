@@ -16,6 +16,8 @@ class GAMEINAWEEK_API APlatformerGameMode : public AGameModeBase
 	
 
 public:
+
+	//public getter and setter functions 
 	UFUNCTION()
 	void AddCoinToTotal();
 	UFUNCTION()
@@ -40,6 +42,7 @@ public:
 	void ReduceLives();
 	UFUNCTION()
 	int GetLives();
+
 private:
 	UPROPERTY()
 	bool InGame = true;
@@ -60,6 +63,8 @@ private:
 	const int zero = 0;
 	const int percMulti = 100;
 	
+
+	//end of game functions and timer
 	UFUNCTION()
 	void LoadNextLevel();
 

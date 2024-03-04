@@ -19,9 +19,9 @@ AMapBoundary::AMapBoundary()
 // Called when the game starts or when spawned
 void AMapBoundary::BeginPlay()
 {
-	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	GameModeRef = Cast<APlatformerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));//cast to the gamemode 
 	Super::BeginPlay();
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AMapBoundary::OnOverlapBegin);
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AMapBoundary::OnOverlapBegin);//overlap dynamic 
 }
 
 // Called every frame
@@ -33,8 +33,8 @@ void AMapBoundary::Tick(float DeltaTime)
 
 void AMapBoundary::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GetWorldSettings()->SetTimeDilation(1.0f);
-	GameModeRef->ReduceLives();
-	OtherActor->SetActorLocation(GameModeRef->GetCheckpoint());
+	GetWorldSettings()->SetTimeDilation(1.0f);//sets the time dilation to 1 
+	GameModeRef->ReduceLives();//decreases player lives 
+	OtherActor->SetActorLocation(GameModeRef->GetCheckpoint());//changes player position to their last checkpoint 
 }
 
