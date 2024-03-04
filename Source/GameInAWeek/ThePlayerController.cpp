@@ -47,10 +47,10 @@ float AThePlayerController::GetLives()
 
 void AThePlayerController::EndofGame()
 {
-	WinPerc = GameModeRef->CoinPercent();
+	
 	if (GameModeRef->GetWinState())//if game won
 	{
-		
+		WinPerc = GameModeRef->CoinPercent();
 		if (WinPerc < oneStar)//if not one star under 25%
 		{
 			WinUI = CreateWidget(this, WinClass);
@@ -76,6 +76,7 @@ void AThePlayerController::EndofGame()
 	}
 	else//lost game
 	{
+		WinPerc = GameModeRef->CoinPercent();
 		LossUI = CreateWidget(this, LossClass);
 		if (LossUI != nullptr)LossUI->AddToViewport();
 	}
